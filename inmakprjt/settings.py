@@ -78,9 +78,11 @@ WSGI_APPLICATION = 'inmakprjt.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'inmakes',
-        'USER':'root',
-        'PASSWORD':'',
+        'NAME': os.getenv('DB_NAME', 'new'),
+        'USER': os.getenv('DB_USER', 'root'),
+        'PASSWORD': os.getenv('DB_PASSWORD', 'oznavA@124!'),
+        'HOST': os.getenv('DB_HOST', 'db'),  # <- use service name 'db' from docker-compose
+        'PORT': os.getenv('DB_PORT', '3306'),
     }
 }
 

@@ -8,6 +8,11 @@ def demo(request):
 
     return render(request,"index.html",
                   {"result":obj,"human":per})
+def about(request):
+
+    return render(request,"about.html")
+
+
 
 # def about(request):
 #     return render(request,"about.html")

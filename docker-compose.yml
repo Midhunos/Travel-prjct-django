@@ -1,0 +1,34 @@
+version: "3.9"
+
+services:
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_DATABASE: new
+      MYSQL_USER: root
+      MYSQL_PASSWORD: oznavA@124!
+      MYSQL_ROOT_PASSWORD: oznavA@124!
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      - DB_NAME=new
+      - DB_USER=root
+      - DB_PASSWORD=oznavA@124!
+      - DB_HOST=db
+      - DB_PORT=3306
+
+volumes:
+  mysql_data:
