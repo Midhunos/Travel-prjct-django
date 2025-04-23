@@ -10,7 +10,7 @@ WORKDIR /app
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
-    netcat \
+    netcat-openbsd \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Python dependencies
@@ -25,3 +25,4 @@ EXPOSE 8000
 
 # Default command to run the Django development server
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+
