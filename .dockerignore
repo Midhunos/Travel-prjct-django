@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+
+# Virtual environments
+venv/
+env/
+.venv/
+.env/
+
+# Django specific
+*.sqlite3
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Git
+.git/
+.gitignore
+
+# Docker
+Dockerfile
+docker-compose.yml
+
+# IDEs and editors
+.vscode/
+.idea/
+*.swp
+
+# Node (if using npm/yarn for frontend)
+node_modules/
+package-lock.json
+yarn.lock
+
+# Test cache
+.pytest_cache/
+.coverage
+htmlcov/
