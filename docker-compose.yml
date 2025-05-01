@@ -1,19 +1,22 @@
+
 version: "3.9"
 
 services:
+  # MySQL Service
   db:
     image: mysql:8.0
     restart: always
     environment:
       MYSQL_DATABASE: new
-      MYSQL_USER: root
-      MYSQL_PASSWORD: oznavA@124!
-      MYSQL_ROOT_PASSWORD: oznavA@124!
+      MYSQL_USER: mysql
+      MYSQL_PASSWORD: 0nhbwylHZIrLTnvtcdgS5X8CaDqiqdb1uTr8q92t6RnQpXAz9IQIwDm2PPZk7cpp
+      MYSQL_ROOT_PASSWORD: 0nhbwylHZIrLTnvtcdgS5X8CaDqiqdb1uTr8q92t6RnQpXAz9IQIwDm2PPZk7cpp
     ports:
       - "3306:3306"
     volumes:
       - mysql_data:/var/lib/mysql
 
+  # Web Service (your Python app)
   web:
     build: .
     command: python manage.py runserver 0.0.0.0:8000
@@ -25,10 +28,31 @@ services:
       - db
     environment:
       - DB_NAME=new
-      - DB_USER=root
-      - DB_PASSWORD=oznavA@124!
+      - DB_USER=mysql
+      - DB_PASSWORD=0nhbwylHZIrLTnvtcdgS5X8CaDqiqdb1uTr8q92t6RnQpXAz9IQIwDm2PPZk7cpp
       - DB_HOST=db
       - DB_PORT=3306
 
+  # phpMyAdmin Service
+  phpmyadmin:
+    image: 'phpmyadmin/phpmyadmin'
+    restart: always
+    environment:
+      PMA_HOST: db  # This is the service name for your MySQL container
+      PMA_PORT: 3306
+      PMA_USER: mysql  # Your MySQL username
+      PMA_PASSWORD: 0nhbwylHZIrLTnvtcdgS5X8CaDqiqdb1uTr8q92t6RnQpXAz9IQIwDm2PPZk7cpp  # Your MySQL password
+    ports:
+      - "8080:80"  # Expose phpMyAdmin on port 8080
+    depends_on:
+      - db
+    networks:
+      - mynetwork
+
 volumes:
   mysql_data:
+
+networks:
+  mynetwork:
+    driver: bridge
+
